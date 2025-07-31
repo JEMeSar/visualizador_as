@@ -9,7 +9,7 @@ import numpy as np
 # Configuración de la página
 st.set_page_config(
     page_title="Línea Temporal de Contratos",
-    page_icon="📊",
+    page_icon="",
     layout="wide"
 )
 
@@ -238,7 +238,7 @@ def create_active_contracts_chart(datos_activos):
             )
     
     fig.update_layout(
-        title="Número de Contratos Activos por Mes y Categoría",
+        title="Contratos Activos",
         xaxis_title="Fecha",
         yaxis_title="Número de Contratos Activos",
         height=400,
@@ -258,7 +258,7 @@ def create_active_contracts_chart(datos_activos):
     return fig
 
 def main():
-    st.title("📊 Línea Temporal de Contratos por Categoría y Persona")
+    st.title("Línea Temporal de Contratos por Categoría y Persona")
     
     # Sidebar para cargar archivo
     st.sidebar.header("Configuración")
@@ -308,19 +308,19 @@ def main():
                     st.metric("Categorías Seleccionadas", len(categorias_seleccionadas))
                 
                 # Gráfico de contratos activos
-                st.header("📈 Contratos Activos por Mes")
+                st.header("Contratos Activos por Mes")
                 fig_activos = create_active_contracts_chart(datos_activos)
                 if fig_activos:
                     st.plotly_chart(fig_activos, use_container_width=True)
                 
                 # Gráfico de línea temporal
-                st.header("📋 Línea Temporal Detallada")
+                st.header("Línea Temporal Detallada")
                 fig_timeline = create_timeline_chart(df, categorias_seleccionadas)
                 if fig_timeline:
                     st.plotly_chart(fig_timeline, use_container_width=True)
                 
                 # Tabla de resumen por categoría
-                st.header("📊 Resumen por Categoría")
+                st.header("Resumen por Categoría")
                 resumen_categorias = []
                 for categoria in categorias_seleccionadas:
                     df_cat = df_filtrado[df_filtrado['CATEGORIA'] == categoria]
@@ -348,25 +348,25 @@ def main():
                 st.warning("⚠️ Selecciona al menos una categoría para visualizar los datos.")
     
     else:
-        st.info("👆 Por favor, carga el archivo Excel usando el panel lateral.")
+        st.info("Carga el archivo Excel usando el panel lateral.")
         
         # Mostrar instrucciones
         st.markdown("""
-        ### 📝 Instrucciones:
+        ### Instrucciones:
         
-        1. **Carga tu archivo Excel** usando el botón en el panel lateral
+        1. **Carga el archivo Excel** usando el botón en el panel lateral
         2. **Selecciona las categorías** que quieres visualizar
-        3. **Explora los gráficos** interactivos:
+        3. **Gráficos** interactivos:
            - **Gráfico de contratos activos**: Muestra el número de contratos activos por mes
            - **Línea temporal**: Muestra cada contrato individual por persona
-        4. **Descarga los datos** filtrados si es necesario
+        4. **Descarga de datos** filtrados
         
-        ### 🔍 Características:
-        - ✅ **Líneas rojas verticales** marcan el cambio de año
-        - ✅ **Números verdes** muestran contratos activos por mes
-        - ✅ **Filtros interactivos** por categoría
-        - ✅ **Tooltips informativos** al pasar el ratón
-        - ✅ **Descarga de datos** en formato CSV
+        ### Características:
+        - **Líneas rojas verticales** marcan el cambio de año
+        - **Números verdes** muestran contratos activos por mes
+        - **Filtros interactivos** por categoría
+        - **Tooltips informativos** al pasar el ratón
+        - **Descarga de datos** en formato CSV
         """)
 
 if __name__ == "__main__":
